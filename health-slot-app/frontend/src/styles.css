@@ -172,6 +172,27 @@ button.big { font-size: 16px; padding: 14px 22px; border-radius: 12px; }
 .pp-signout { color: var(--accent); text-decoration: none; font-weight: 600; }
 .pp-signout:hover { text-decoration: underline; }
 
+/* ---------- Emergency Mode (patient view) ---------- */
+.emergency { display: flex; flex-direction: column; gap: 16px; }
+.emergency-title { font-size: 22px; }
+.call-911 {
+  display: block; text-align: center; text-decoration: none;
+  background: var(--bad); color: #fff; font-size: 24px; font-weight: 700;
+  padding: 18px 22px; min-height: 48px; border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(179, 50, 74, 0.25);
+}
+.call-911:hover { background: #8f2a3c; }
+.call-911:focus-visible { outline: 3px solid var(--accent-strong); outline-offset: 3px; }
+.emergency-reassure { font-size: 16px; line-height: 1.5; color: var(--text); margin: 0; font-weight: 600; }
+.emergency-er { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+.emergency-er h3 { font-size: 14px; color: var(--muted); }
+.emergency-er-name { font-size: 20px; font-weight: 700; color: var(--text); margin: 6px 0 2px; }
+.emergency-er-meta { font-size: 15px; color: var(--text); margin: 0 0 4px; }
+.emergency-er-dist { font-size: 15px; color: var(--muted); margin: 0 0 12px; }
+.emergency-state { font-size: 15px; color: var(--text); }
+.emergency-state-error { color: var(--bad); }
+.emergency-demo-note { font-size: 13px; color: var(--muted); margin: 0; }
+
 /* ---------- Clinic schedule ---------- */
 .clinic-head-card { margin-bottom: 18px; }
 .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 18px; }

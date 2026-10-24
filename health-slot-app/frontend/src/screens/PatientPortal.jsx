@@ -9,6 +9,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { api } from '../services/api'
 import { connectSocket } from '../services/socket'
 import { fmtCountdown, remaining, useNow } from '../hooks'
+import EmergencyTab from '../components/EmergencyTab'
 
 const FEATURED_PATIENT_ID = 1
 
@@ -40,6 +41,7 @@ export default function PatientPortal() {
   const [connected, setConnected] = useState(false)
   const [busy, setBusy] = useState(false)
   const [notice, setNotice] = useState(null)
+  const [tab, setTab] = useState('standby')
   const now = useNow()
 
   const refresh = useCallback(async () => {
@@ -127,6 +129,26 @@ export default function PatientPortal() {
           </div>
         </div>
 
+        <div className="tabs" role="tablist">
+          <button
+            className={`tab ${tab === 'standby' ? 'active' : ''}`}
+            role="tab"
+            aria-selected={tab === 'standby'}
+            onClick={() => setTab('standby')}
+          >
+            Standby
+          </button>
+          <button
+            className={`tab ${tab === 'emergency' ? 'active' : ''}`}
+            role="tab"
+            aria-selected={tab === 'emergency'}
+            onClick={() => setTab('emergency')}
+          >
+            Emergency
+          </button>
+        </div>
+
+        {tab === 'standby' && (
         <div className="pp-body">
           <div className="pp-standby">
             <div>
@@ -200,6 +222,13 @@ export default function PatientPortal() {
             </div>
           )}
         </div>
+        )}
+
+        {tab === 'emergency' && (
+          <div className="pp-body">
+            <EmergencyTab lat={p.lat} lng={p.lng} />
+          </div>
+        )}
 
         <div className="pp-foot">
           <span className={`conn ${connected ? 'on' : 'off'}`} /> {connected ? 'Live' : 'Reconnecting…'} · Synthetic patient (Synthea)

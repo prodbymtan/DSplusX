@@ -32,5 +32,6 @@ export const api = {
   expand: (slotId) => request(`/slots/${slotId}/expand`, { method: 'POST' }),
   metrics: () => request('/metrics'),
   map: () => request('/map'),
+  nearestEr: (lat, lon) => request(`/emergency/nearest-er?lat=${lat}&lon=${lon}`),
   reset: () => request('/demo/reset', { method: 'POST' }),
 }

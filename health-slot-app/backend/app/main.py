@@ -16,7 +16,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy import func, select
 
-from app.api import appointments, demo, metrics, patients, slots, ws
+from app.api import appointments, demo, emergency, metrics, patients, slots, ws
 from app.core.config import settings
 from app.core.database import SessionLocal, init_db
 from app.models.db_models import Clinic
@@ -46,7 +46,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-for r in (appointments.router, slots.router, patients.router, metrics.router, demo.router):
+for r in (appointments.router, slots.router, patients.router, metrics.router, demo.router, emergency.router):
     app.include_router(r, prefix="/api")
 app.include_router(ws.router)
 
