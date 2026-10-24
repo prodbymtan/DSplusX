@@ -242,19 +242,37 @@ async def open_slot(appointment_id: int, reason: str) -> dict:
     return result["slot"]
 
 
+def _current_round(slot_id: int) -> int | None:
+    """The slot's current ripple round, or None if it's no longer open."""
+    with SessionLocal() as db:
+        slot = db.get(Slot, slot_id)
+        return slot.round if slot and slot.status == "open" else None
+
+
+async def _broadcast_expand(result: dict, slot_id: int) -> None:
+    for patient_id, payload in result["offers"]:
+        await broadcaster.to_patient(patient_id, {"type": "offer", "offer": payload})
+    # Patients who already have the offer get a refreshed countdown.
+    await broadcaster.to_patients(result["still_offered"], {"type": "offer_extended", "slot_id": slot_id})
+    await broadcaster.to_clinic({"type": "slot_updated", "slot_id": slot_id, "summary": result["summary"]})
+
+
 async def _ripple(slot_id: int) -> None:
+    """Wait out each window, then widen. Rounds are read from the slot itself, so a
+    manual "increase radius" push (expand_now) advances the same counter and the timer
+    simply continues from wherever the slot is now."""
     try:
-        for round_no in range(1, settings.ripple_rounds + 1):
+        while True:
             await asyncio.sleep(settings.offer_window_seconds)
-            result = await asyncio.to_thread(_expand, slot_id, round_no)
+            current = await asyncio.to_thread(_current_round, slot_id)
+            if current is None:
+                return  # claimed or already expired
+            if current >= settings.ripple_rounds:
+                break  # no rounds left; fall through to expire
+            result = await asyncio.to_thread(_expand, slot_id, current + 1)
             if result is None:
                 return
-            for patient_id, payload in result["offers"]:
-                await broadcaster.to_patient(patient_id, {"type": "offer", "offer": payload})
-            # Patients who already have the offer get a refreshed countdown.
-            await broadcaster.to_patients(result["still_offered"], {"type": "offer_extended", "slot_id": slot_id})
-            await broadcaster.to_clinic({"type": "slot_updated", "slot_id": slot_id, "summary": result["summary"]})
-        await asyncio.sleep(settings.offer_window_seconds)
+            await _broadcast_expand(result, slot_id)
         result = await asyncio.to_thread(_expire, slot_id)
         if result:
             await broadcaster.to_patients(result["offered"], {"type": "expired", "slot_id": slot_id})
@@ -263,6 +281,33 @@ async def _ripple(slot_id: int) -> None:
         pass
     except Exception:  # noqa: BLE001
         log.exception("Ripple task for slot %s failed", slot_id)
+
+
+async def expand_now(slot_id: int) -> dict:
+    """Manually widen the radius right now (nurse pressed "Increase radius"), without
+    waiting for the current window. Reuses the same _expand step and then restarts the
+    ripple timer so the remaining automatic rounds continue from the new round."""
+    current = await asyncio.to_thread(_current_round, slot_id)
+    if current is None:
+        raise ServiceError(409, "This slot is no longer open.")
+    if current >= settings.ripple_rounds:
+        raise ServiceError(409, "The radius is already at its widest.")
+
+    # Stop the pending auto-ripple so it doesn't double-expand.
+    task = _tasks.pop(slot_id, None)
+    if task:
+        task.cancel()
+
+    result = await asyncio.to_thread(_expand, slot_id, current + 1)
+    if result is None:
+        raise ServiceError(409, "This slot is no longer open.")
+    await _broadcast_expand(result, slot_id)
+
+    # Restart the ripple timer for whatever rounds remain.
+    new_task = asyncio.create_task(_ripple(slot_id))
+    _tasks[slot_id] = new_task
+    new_task.add_done_callback(lambda t, sid=slot_id: _tasks.pop(sid, None) if _tasks.get(sid) is t else None)
+    return result["slot"]
 
 
 async def claim(slot_id: int, patient_id: int) -> dict:

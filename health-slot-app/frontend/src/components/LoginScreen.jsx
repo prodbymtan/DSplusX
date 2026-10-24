@@ -14,7 +14,7 @@ import { useId, useState } from 'react'
 // Then replace the "not available yet" message below with the real request + error handling,
 // and gate the demo button behind an explicit demo flag.
 
-export default function LoginScreen({ onContinue }) {
+export default function LoginScreen({ onEnter }) {
   const [role, setRole] = useState('patient') // 'patient' | 'staff'
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -35,6 +35,9 @@ export default function LoginScreen({ onContinue }) {
     return next
   }
 
+  // 'staff' is the clinic-facing side of the app.
+  const destination = role === 'staff' ? 'clinic' : 'patient'
+
   const onSubmit = async (e) => {
     e.preventDefault()
     const next = validate()
@@ -44,10 +47,11 @@ export default function LoginScreen({ onContinue }) {
     }
     setErrors({})
     setSubmitting(true)
-    // No auth endpoint exists yet (see TODO above). Be honest instead of faking a session.
+    // No real auth endpoint exists yet (see TODO above), so a valid-looking form just
+    // opens the demo for the chosen role rather than faking a session.
     setTimeout(() => {
       setSubmitting(false)
-      setErrors({ form: 'Sign-in isn’t connected yet. Use “Continue to demo” to explore the dashboard.' })
+      onEnter(destination)
     }, 150)
   }
 
@@ -133,10 +137,10 @@ export default function LoginScreen({ onContinue }) {
 
         <div className="login-divider">or</div>
 
-        <button type="button" className="btn-demo" onClick={onContinue}>
-          Continue to demo
+        <button type="button" className="btn-demo" onClick={() => onEnter(destination)}>
+          Continue to demo as {role === 'staff' ? 'clinic staff' : 'patient'}
         </button>
-        <p className="login-demo-note">No account needed. Opens the live dashboard with demo data.</p>
+        <p className="login-demo-note">No account needed. Opens the live {role === 'staff' ? 'clinic console' : 'patient view'} with demo data.</p>
       </div>
     </main>
   )

@@ -38,3 +38,12 @@ async def claim_slot(slot_id: int, body: ClaimRequest) -> dict:
         return await offers.claim(slot_id, body.patient_id)
     except ServiceError as e:
         raise HTTPException(e.status_code, e.detail) from e
+
+
+@router.post("/{slot_id}/expand")
+async def expand_slot(slot_id: int) -> dict:
+    """Manually widen the search radius now (nurse-triggered), without waiting for the window."""
+    try:
+        return await offers.expand_now(slot_id)
+    except ServiceError as e:
+        raise HTTPException(e.status_code, e.detail) from e
