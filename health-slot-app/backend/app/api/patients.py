@@ -12,6 +12,7 @@ from app.models.db_models import Clinic, Offer, Patient, Slot
 from app.services.broadcaster import broadcaster
 from app.services.matching import eligibility
 from app.services.offers import seconds_left, time_label
+from app.services import wearable
 
 router = APIRouter(prefix="/patients", tags=["patients"])
 
@@ -81,6 +82,12 @@ async def patient_state(patient_id: int) -> dict:
     if state is None:
         raise HTTPException(404, "Patient not found.")
     return state
+
+
+@router.get("/{patient_id}/wearable")
+async def patient_wearable(patient_id: int) -> dict:
+    """Read-only summary of the patient's recorded wearable sessions (not diagnostic)."""
+    return await asyncio.to_thread(wearable.summary_for_patient, patient_id)
 
 
 def _set_available(patient_id: int, value: bool) -> bool:

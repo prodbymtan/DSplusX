@@ -9,6 +9,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { api } from '../services/api'
 import { connectSocket } from '../services/socket'
 import { fmtCountdown, remaining, useNow } from '../hooks'
+import WearablePanel from '../components/WearablePanel'
 
 const FEATURED_PATIENT_ID = 1
 
@@ -40,6 +41,7 @@ export default function PatientPortal() {
   const [connected, setConnected] = useState(false)
   const [busy, setBusy] = useState(false)
   const [notice, setNotice] = useState(null)
+  const [view, setView] = useState('appointments') // 'appointments' | 'health'
   const now = useNow()
 
   const refresh = useCallback(async () => {
@@ -128,6 +130,10 @@ export default function PatientPortal() {
         </div>
 
         <div className="pp-body">
+          {view === 'health' ? (
+            <WearablePanel patientId={FEATURED_PATIENT_ID} />
+          ) : (
+          <>
           <div className="pp-standby">
             <div>
               <div className="label">Standby for openings</div>
@@ -199,7 +205,20 @@ export default function PatientPortal() {
               )}
             </div>
           )}
+          </>
+          )}
         </div>
+
+        <nav className="pp-nav">
+          <button className={view === 'appointments' ? 'active' : ''} onClick={() => setView('appointments')}>
+            <span className="pp-nav-ico">🔔</span>
+            <span>Appointments</span>
+          </button>
+          <button className={view === 'health' ? 'active' : ''} onClick={() => setView('health')}>
+            <span className="pp-nav-ico">⌚</span>
+            <span>Health</span>
+          </button>
+        </nav>
 
         <div className="pp-foot">
           <span className={`conn ${connected ? 'on' : 'off'}`} /> {connected ? 'Live' : 'Reconnecting…'} · Synthetic patient (Synthea)
