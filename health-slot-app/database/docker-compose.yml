@@ -1,0 +1,21 @@
+# OPTIONAL. The app uses SQLite by default and needs no database setup.
+# Use this if you want Postgres (tests pass on Postgres 16) with PostGIS available.
+#
+#   docker compose -f database/docker-compose.yml up -d
+#   pip install "psycopg[binary]==3.3.2"
+#   echo "DATABASE_URL=postgresql+psycopg://health:health@localhost:5432/health_slot" > backend/.env
+#
+# Distances are computed in Python (haversine), so PostGIS is not required by the app.
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_USER: health
+      POSTGRES_PASSWORD: health
+      POSTGRES_DB: health_slot
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:

@@ -1,0 +1,8 @@
+# Python 3.12 or 3.13. Same pins as backend so model.pkl loads in both places.
+pandas==3.1.0
+numpy==2.5.4
+scikit-learn==1.9.1
+joblib==1.6.0
+matplotlib==3.11.2
+jupyter==1.1.1
+nbconvert==7.17.2

@@ -1,0 +1,16 @@
+# Python 3.12 or 3.13. Versions pinned: model.pkl must load with the same scikit-learn.
+fastapi==0.162.0
+uvicorn[standard]==0.54.0
+sqlalchemy==2.1.6
+pydantic==2.14.1
+pandas==3.1.0
+numpy==2.5.4
+scikit-learn==1.9.1
+joblib==1.6.0
+
+# Tests
+pytest==9.1.1
+httpx==0.28.1
+
+# Optional: Postgres/PostGIS instead of SQLite (see database/docker-compose.yml)
+# psycopg[binary]==3.3.2

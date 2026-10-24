@@ -1,0 +1,116 @@
+:root {
+  --bg: #f6f5f1;
+  --card: #ffffff;
+  --text: #1f1e1b;
+  --muted: #6b6a64;
+  --border: #e3e1d9;
+  --accent: #534ab7;
+  --accent-bg: #eeedfe;
+  --good: #0f6e56;
+  --good-bg: #e1f5ee;
+  --bad: #a32d2d;
+  --bad-bg: #fcebeb;
+  --warn: #854f0b;
+  --warn-bg: #faeeda;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+h1 { font-size: 22px; margin: 0; font-weight: 600; }
+h2 { font-size: 16px; margin: 0; font-weight: 600; }
+h3 { font-size: 14px; margin: 0 0 6px; font-weight: 600; }
+code { font-size: 12px; background: var(--accent-bg); color: var(--accent); padding: 1px 5px; border-radius: 4px; }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+.ok { color: var(--good); font-weight: 500; }
+.warn { color: var(--warn); }
+.good { color: var(--good); }
+.arrow { color: var(--muted); font-weight: 400; font-size: 0.8em; }
+
+button {
+  font: inherit; font-size: 13px; padding: 6px 12px; border-radius: 8px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--card); color: var(--text);
+}
+button:hover { background: #f1efe8; }
+button:disabled { opacity: 0.5; cursor: wait; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button.primary:hover { background: #3c3489; }
+button.ghost { border-color: transparent; color: var(--muted); }
+
+.app { max-width: 1280px; margin: 0 auto; padding: 16px; }
+.topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.badge { font-size: 12px; background: var(--warn-bg); color: var(--warn); padding: 4px 10px; border-radius: 999px; }
+.error { background: var(--bad-bg); color: var(--bad); padding: 8px 12px; border-radius: 8px; margin-bottom: 10px; font-size: 13px; }
+.conn { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: none; }
+.conn.on { background: #1d9e75; }
+.conn.off { background: #e24b4a; }
+
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.stat { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; }
+.stat-label { font-size: 12px; color: var(--muted); }
+.stat-value { font-size: 22px; font-weight: 600; margin: 2px 0; }
+.stat-sub { font-size: 11px; color: var(--muted); }
+
+.grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 14px; margin-bottom: 14px; }
+@media (max-width: 960px) { .grid { grid-template-columns: 1fr; } }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+.card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+
+.row { display: grid; grid-template-columns: 70px minmax(0, 1fr) 82px 190px; gap: 10px; align-items: center; padding: 9px 0; border-top: 1px solid var(--border); font-size: 14px; }
+.row.released .who { opacity: 0.6; }
+.time { font-variant-numeric: tabular-nums; font-weight: 500; }
+.pill { font-size: 11px; padding: 3px 8px; border-radius: 999px; text-align: center; white-space: nowrap; }
+.pill.high { background: var(--bad-bg); color: var(--bad); }
+.pill.low { background: var(--good-bg); color: var(--good); }
+.action { text-align: right; }
+.buttons { display: flex; gap: 4px; justify-content: flex-end; }
+.confirm-note { margin-bottom: 3px; }
+.slot-status { font-size: 13px; font-weight: 500; }
+.slot-status.open { color: var(--warn); }
+.slot-status.booked { color: var(--good); }
+.slot-status.expired { color: var(--muted); }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; display: inline-block; margin-right: 4px; vertical-align: 1px; }
+@media (prefers-reduced-motion: no-preference) {
+  .pulse { animation: pulse 1.2s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: 0.3; } }
+}
+.activity { border-top: 1px solid var(--border); margin-top: 6px; padding-top: 10px; }
+.activity ul { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+.activity li { padding: 3px 0; }
+
+.section-title { margin-bottom: 8px; }
+.phone-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.phone {
+  background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 12px;
+  min-height: 170px; display: flex; flex-direction: column; gap: 8px; font-size: 13px;
+}
+.phone.has-offer { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-bg); }
+.phone-top { display: flex; justify-content: space-between; gap: 6px; }
+.phone .name { font-weight: 600; font-size: 14px; }
+.phone-body { flex: 1; }
+.offer { background: var(--accent-bg); border-radius: 10px; padding: 9px; }
+.offer-title { font-weight: 600; color: #3c3489; }
+.offer-row { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+.countdown { font-variant-numeric: tabular-nums; font-weight: 600; color: #3c3489; }
+.toggle { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; margin-top: auto; }
+
+.right-col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.map svg { width: 100%; height: auto; display: block; background: #fbfaf7; border-radius: 10px; margin-bottom: 6px; }
+.legend { display: flex; gap: 12px; flex-wrap: wrap; }
+.lg { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; }
+.lg.clinic { background: var(--accent); border-radius: 2px; }
+.lg.patient { background: #1d9e75; }
+.lg.offered { background: #ef9f27; }
+.lg.hospital { background: none; border: 2px solid #a32d2d; border-radius: 0; width: 8px; height: 8px; }
+.ring { fill: none; stroke: #d3d1c7; stroke-dasharray: 3 4; }
+.ring-label { font-size: 10px; fill: #888780; }
+.patient { fill: #1d9e75; stroke: #fff; stroke-width: 2; }
+.patient.offered { fill: #ef9f27; }
+.patient.paused { fill: #b4b2a9; }
+.pt-label { font-size: 11px; fill: #2c2c2a; font-weight: 600; }
+.hospital { stroke: #a32d2d; stroke-width: 2; }
+.hosp-label { font-size: 10px; fill: #791f1f; }
+.clinic-mark { fill: var(--accent); stroke: #fff; stroke-width: 2; }

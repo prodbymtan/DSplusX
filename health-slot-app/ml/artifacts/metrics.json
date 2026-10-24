@@ -1,0 +1,454 @@
+{
+  "model_name": "gradient_boosting",
+  "auc": 0.7349,
+  "brier": 0.138,
+  "top20_catch_rate": 0.3835,
+  "fill_rate_baseline": 0.117,
+  "fill_rate_ours": 0.2239,
+  "slots_recovered": 1815.4,
+  "slots_recovered_per_100_appts": 4.21,
+  "double_bookings_per_100_appts": 1.67,
+  "high_risk_threshold": 0.3561,
+  "base_noshow_rate": 0.1878,
+  "n_train": 67360,
+  "n_test": 43161,
+  "test_days": 10,
+  "test_period": [
+    "2016-05-24",
+    "2016-06-08"
+  ],
+  "validation": {
+    "logistic_regression": {
+      "auc": 0.7329,
+      "brier": 0.1507,
+      "top20_catch_rate": 0.3619
+    },
+    "gradient_boosting": {
+      "auc": 0.7391,
+      "brier": 0.1502,
+      "top20_catch_rate": 0.3714
+    }
+  },
+  "test_by_model": {
+    "logistic_regression": {
+      "auc": 0.7284,
+      "brier": 0.1386,
+      "top20_catch_rate": 0.3684
+    },
+    "gradient_boosting": {
+      "auc": 0.7349,
+      "brier": 0.138,
+      "top20_catch_rate": 0.3835
+    }
+  },
+  "policies": {
+    "budget": 0.2,
+    "fill_probability": 0.6501,
+    "none": {
+      "prompts_sent": 0,
+      "recovered": 0.0,
+      "conflicts": 0.0,
+      "fill_rate": 0.0,
+      "recovered_per_conflict": null
+    },
+    "random": {
+      "prompts_sent": 8633,
+      "recovered": 948.7,
+      "conflicts": 911.6,
+      "fill_rate": 0.117,
+      "recovered_per_conflict": 1.04
+    },
+    "model": {
+      "prompts_sent": 8633,
+      "recovered": 1815.4,
+      "conflicts": 719.0,
+      "fill_rate": 0.2239,
+      "recovered_per_conflict": 2.53
+    },
+    "everyone": {
+      "prompts_sent": 43161,
+      "recovered": 4743.0,
+      "conflicts": 4557.5,
+      "fill_rate": 0.5851,
+      "recovered_per_conflict": 1.04
+    }
+  },
+  "budget_curve": [
+    {
+      "budget": 0.05,
+      "model_fill_rate": 0.0653,
+      "random_fill_rate": 0.0293,
+      "model_double_bookings_per_100": 0.38,
+      "random_double_bookings_per_100": 0.53
+    },
+    {
+      "budget": 0.1,
+      "model_fill_rate": 0.1223,
+      "random_fill_rate": 0.0585,
+      "model_double_bookings_per_100": 0.79,
+      "random_double_bookings_per_100": 1.06
+    },
+    {
+      "budget": 0.15,
+      "model_fill_rate": 0.1741,
+      "random_fill_rate": 0.0878,
+      "model_double_bookings_per_100": 1.22,
+      "random_double_bookings_per_100": 1.58
+    },
+    {
+      "budget": 0.2,
+      "model_fill_rate": 0.2239,
+      "random_fill_rate": 0.117,
+      "model_double_bookings_per_100": 1.67,
+      "random_double_bookings_per_100": 2.11
+    },
+    {
+      "budget": 0.25,
+      "model_fill_rate": 0.2707,
+      "random_fill_rate": 0.1463,
+      "model_double_bookings_per_100": 2.12,
+      "random_double_bookings_per_100": 2.64
+    },
+    {
+      "budget": 0.3,
+      "model_fill_rate": 0.3151,
+      "random_fill_rate": 0.1755,
+      "model_double_bookings_per_100": 2.59,
+      "random_double_bookings_per_100": 3.17
+    },
+    {
+      "budget": 0.35,
+      "model_fill_rate": 0.3558,
+      "random_fill_rate": 0.2048,
+      "model_double_bookings_per_100": 3.07,
+      "random_double_bookings_per_100": 3.7
+    },
+    {
+      "budget": 0.4,
+      "model_fill_rate": 0.3924,
+      "random_fill_rate": 0.234,
+      "model_double_bookings_per_100": 3.56,
+      "random_double_bookings_per_100": 4.22
+    },
+    {
+      "budget": 0.45,
+      "model_fill_rate": 0.4279,
+      "random_fill_rate": 0.2633,
+      "model_double_bookings_per_100": 4.06,
+      "random_double_bookings_per_100": 4.75
+    },
+    {
+      "budget": 0.5,
+      "model_fill_rate": 0.4578,
+      "random_fill_rate": 0.2925,
+      "model_double_bookings_per_100": 4.59,
+      "random_double_bookings_per_100": 5.28
+    },
+    {
+      "budget": 0.55,
+      "model_fill_rate": 0.4902,
+      "random_fill_rate": 0.3218,
+      "model_double_bookings_per_100": 5.1,
+      "random_double_bookings_per_100": 5.81
+    },
+    {
+      "budget": 0.6,
+      "model_fill_rate": 0.521,
+      "random_fill_rate": 0.351,
+      "model_double_bookings_per_100": 5.63,
+      "random_double_bookings_per_100": 6.34
+    },
+    {
+      "budget": 0.65,
+      "model_fill_rate": 0.5461,
+      "random_fill_rate": 0.3803,
+      "model_double_bookings_per_100": 6.17,
+      "random_double_bookings_per_100": 6.86
+    },
+    {
+      "budget": 0.7,
+      "model_fill_rate": 0.5581,
+      "random_fill_rate": 0.4095,
+      "model_double_bookings_per_100": 6.77,
+      "random_double_bookings_per_100": 7.39
+    },
+    {
+      "budget": 0.75,
+      "model_fill_rate": 0.5638,
+      "random_fill_rate": 0.4388,
+      "model_double_bookings_per_100": 7.4,
+      "random_double_bookings_per_100": 7.92
+    },
+    {
+      "budget": 0.8,
+      "model_fill_rate": 0.5685,
+      "random_fill_rate": 0.468,
+      "model_double_bookings_per_100": 8.03,
+      "random_double_bookings_per_100": 8.45
+    },
+    {
+      "budget": 0.85,
+      "model_fill_rate": 0.5726,
+      "random_fill_rate": 0.4973,
+      "model_double_bookings_per_100": 8.66,
+      "random_double_bookings_per_100": 8.98
+    },
+    {
+      "budget": 0.9,
+      "model_fill_rate": 0.5768,
+      "random_fill_rate": 0.5266,
+      "model_double_bookings_per_100": 9.29,
+      "random_double_bookings_per_100": 9.5
+    },
+    {
+      "budget": 0.95,
+      "model_fill_rate": 0.5818,
+      "random_fill_rate": 0.5558,
+      "model_double_bookings_per_100": 9.92,
+      "random_double_bookings_per_100": 10.03
+    },
+    {
+      "budget": 1.0,
+      "model_fill_rate": 0.5851,
+      "random_fill_rate": 0.5851,
+      "model_double_bookings_per_100": 10.56,
+      "random_double_bookings_per_100": 10.56
+    }
+  ],
+  "assumptions": {
+    "confirm_rate_if_will_show": 0.8,
+    "confirm_rate_if_will_noshow": 0.1,
+    "standby_patients_in_radius": 3.0,
+    "standby_accept_prob": 0.35
+  },
+  "definitions": {
+    "fill_rate": "Share of no-show slots that get refilled by a standby patient (expected value).",
+    "fill_rate_baseline": "Same outreach budget (20% of appointments), but patients picked at random: no model.",
+    "fill_rate_ours": "Same budget, patients picked by highest predicted no-show risk.",
+    "double_bookings": "Released slot was refilled but the original patient showed up anyway.",
+    "top20_catch_rate": "Share of all no-shows that fall in the top 20% of predicted risk."
+  },
+  "massachusetts": {
+    "synthetic_residents": 3000,
+    "anchor": {
+      "site": "boston",
+      "radius_miles": 2,
+      "standby_patients": 3.0
+    },
+    "ripple_radius_miles": 8,
+    "boston": {
+      "label": "Boston (Kenmore)",
+      "residents_within_2mi": 175748,
+      "standby_within_2mi": 3.0,
+      "fill": {
+        "2": {
+          "standby_patients": 3.0,
+          "fill_probability": 0.6501,
+          "fill_rate_model": 0.2239
+        },
+        "8": {
+          "standby_patients": 26.84,
+          "fill_probability": 0.9999,
+          "fill_rate_model": 0.3445
+        }
+      }
+    },
+    "rural": {
+      "label": "Greenfield (Franklin Co.)",
+      "residents_within_2mi": 7030,
+      "standby_within_2mi": 0.12,
+      "fill": {
+        "2": {
+          "standby_patients": 0.12,
+          "fill_probability": 0.0411,
+          "fill_rate_model": 0.0142
+        },
+        "8": {
+          "standby_patients": 0.48,
+          "fill_probability": 0.1546,
+          "fill_rate_model": 0.0533
+        }
+      }
+    },
+    "access_by_county": [
+      {
+        "county": "Barnstable",
+        "synthetic_residents": 120,
+        "median_miles_to_hospital": 6.945,
+        "share_over_10mi_from_hospital": 0.225,
+        "median_miles_to_primary_care": 2.42
+      },
+      {
+        "county": "Franklin",
+        "synthetic_residents": 22,
+        "median_miles_to_hospital": 6.352,
+        "share_over_10mi_from_hospital": 0.091,
+        "median_miles_to_primary_care": 3.683
+      },
+      {
+        "county": "Hampshire",
+        "synthetic_residents": 71,
+        "median_miles_to_hospital": 5.53,
+        "share_over_10mi_from_hospital": 0.07,
+        "median_miles_to_primary_care": 2.695
+      },
+      {
+        "county": "Plymouth",
+        "synthetic_residents": 226,
+        "median_miles_to_hospital": 5.529,
+        "share_over_10mi_from_hospital": 0.168,
+        "median_miles_to_primary_care": 2.816
+      },
+      {
+        "county": "Dukes",
+        "synthetic_residents": 11,
+        "median_miles_to_hospital": 5.428,
+        "share_over_10mi_from_hospital": 0.273,
+        "median_miles_to_primary_care": 3.991
+      },
+      {
+        "county": "Worcester",
+        "synthetic_residents": 358,
+        "median_miles_to_hospital": 4.439,
+        "share_over_10mi_from_hospital": 0.067,
+        "median_miles_to_primary_care": 2.621
+      },
+      {
+        "county": "Bristol",
+        "synthetic_residents": 237,
+        "median_miles_to_hospital": 4.235,
+        "share_over_10mi_from_hospital": 0.004,
+        "median_miles_to_primary_care": 2.745
+      },
+      {
+        "county": "Norfolk",
+        "synthetic_residents": 304,
+        "median_miles_to_hospital": 3.875,
+        "share_over_10mi_from_hospital": 0.026,
+        "median_miles_to_primary_care": 1.416
+      },
+      {
+        "county": "Berkshire",
+        "synthetic_residents": 56,
+        "median_miles_to_hospital": 3.849,
+        "share_over_10mi_from_hospital": 0.036,
+        "median_miles_to_primary_care": 2.61
+      },
+      {
+        "county": "Hampden",
+        "synthetic_residents": 215,
+        "median_miles_to_hospital": 3.474,
+        "share_over_10mi_from_hospital": 0.014,
+        "median_miles_to_primary_care": 2.129
+      },
+      {
+        "county": "Essex",
+        "synthetic_residents": 301,
+        "median_miles_to_hospital": 2.982,
+        "share_over_10mi_from_hospital": 0.0,
+        "median_miles_to_primary_care": 1.779
+      },
+      {
+        "county": "Nantucket",
+        "synthetic_residents": 6,
+        "median_miles_to_hospital": 2.949,
+        "share_over_10mi_from_hospital": 0.0,
+        "median_miles_to_primary_care": 2.963
+      },
+      {
+        "county": "Middlesex",
+        "synthetic_residents": 728,
+        "median_miles_to_hospital": 2.431,
+        "share_over_10mi_from_hospital": 0.021,
+        "median_miles_to_primary_care": 1.443
+      },
+      {
+        "county": "Suffolk",
+        "synthetic_residents": 345,
+        "median_miles_to_hospital": 1.515,
+        "share_over_10mi_from_hospital": 0.0,
+        "median_miles_to_primary_care": 1.139
+      }
+    ],
+    "estimates": {
+      "boston": {
+        "label": "Boston (Kenmore)",
+        "lat": 42.3489,
+        "lng": -71.0951,
+        "residents_within": {
+          "1": {
+            "synthetic": 20,
+            "estimated_residents": 46866
+          },
+          "2": {
+            "synthetic": 75,
+            "estimated_residents": 175748
+          },
+          "4": {
+            "synthetic": 295,
+            "estimated_residents": 691275
+          },
+          "8": {
+            "synthetic": 671,
+            "estimated_residents": 1572358
+          },
+          "16": {
+            "synthetic": 1126,
+            "estimated_residents": 2638562
+          }
+        },
+        "standby_patients_within": {
+          "1": 0.8,
+          "2": 3.0,
+          "4": 11.8,
+          "8": 26.84,
+          "16": 45.04
+        }
+      },
+      "rural": {
+        "label": "Greenfield (Franklin Co.)",
+        "lat": 42.5876,
+        "lng": -72.5995,
+        "residents_within": {
+          "1": {
+            "synthetic": 1,
+            "estimated_residents": 2343
+          },
+          "2": {
+            "synthetic": 3,
+            "estimated_residents": 7030
+          },
+          "4": {
+            "synthetic": 5,
+            "estimated_residents": 11717
+          },
+          "8": {
+            "synthetic": 12,
+            "estimated_residents": 28120
+          },
+          "16": {
+            "synthetic": 42,
+            "estimated_residents": 98419
+          }
+        },
+        "standby_patients_within": {
+          "1": 0.04,
+          "2": 0.12,
+          "4": 0.2,
+          "8": 0.48,
+          "16": 1.68
+        }
+      }
+    },
+    "sources": {
+      "residents": "Synthea synthetic Massachusetts population, 3,000 living residents, scaled to 2020 Census (7,029,917).",
+      "hospitals": "MassGIS / MA DPH licensed hospitals (103 facilities; 70 acute).",
+      "primary_care_sites": "Synthea's Massachusetts primary-care site list (456 sites)."
+    },
+    "caveats": [
+      "Synthetic residents follow census town populations but are not real people.",
+      "Rural counts come from few synthetic residents; rerun Synthea with more people for tighter numbers.",
+      "Standby supply is anchored to an assumption (3 within 2 mi in Boston) and scaled by density."
+    ]
+  }
+}

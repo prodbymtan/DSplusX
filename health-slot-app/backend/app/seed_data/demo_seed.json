@@ -1,0 +1,331 @@
+{
+  "clinic": {
+    "name": "Kenmore Primary Care (demo clinic)",
+    "lat": 42.3489,
+    "lng": -71.0951,
+    "specialty": "primary_care",
+    "accepted_insurance": [
+      "Medicare",
+      "Medicaid",
+      "Dual Eligible",
+      "Blue Cross Blue Shield",
+      "UnitedHealthcare",
+      "Aetna",
+      "Cigna Health",
+      "Anthem",
+      "NO_INSURANCE"
+    ]
+  },
+  "standby": [
+    {
+      "name": "Glenn A.",
+      "synthea_id": "1cc3057f-f274-3e3a-99b6-9a8caa349df2",
+      "age": 26,
+      "gender": "M",
+      "lat": 42.35013,
+      "lng": -71.10157,
+      "city": "Boston",
+      "insurance": "Blue Cross Blue Shield",
+      "radius_miles": 3.0,
+      "reliability": 0.95
+    },
+    {
+      "name": "Silvia M.",
+      "synthea_id": "d60fb820-35ee-637c-1f6a-8aea98086534",
+      "age": 31,
+      "gender": "F",
+      "lat": 42.35594,
+      "lng": -71.08957,
+      "city": "Boston",
+      "insurance": "NO_INSURANCE",
+      "radius_miles": 3.0,
+      "reliability": 0.85
+    },
+    {
+      "name": "Hassie S.",
+      "synthea_id": "81ab0685-5cf2-f91e-de7b-74ecefacf45c",
+      "age": 52,
+      "gender": "F",
+      "lat": 42.38395,
+      "lng": -71.0894,
+      "city": "Boston",
+      "insurance": "Blue Cross Blue Shield",
+      "radius_miles": 2.0,
+      "reliability": 0.9
+    },
+    {
+      "name": "Aline D.",
+      "synthea_id": "d9c46105-1474-dd8e-9ccf-77f7524cc356",
+      "age": 34,
+      "gender": "F",
+      "lat": 42.34642,
+      "lng": -71.09294,
+      "city": "Boston",
+      "insurance": "Humana",
+      "radius_miles": 3.0,
+      "reliability": 0.92
+    }
+  ],
+  "schedule": [
+    {
+      "start": "09:00",
+      "label": "Anibal H.",
+      "synthea_id": "253e54ab-c661-58f4-20b6-6a63f5049158",
+      "age": 44,
+      "gender": "M",
+      "hypertension": 0,
+      "diabetes": 0,
+      "prior_appts": 0,
+      "prior_noshows": 0,
+      "lead_days": 0,
+      "booked_hour": 8,
+      "sms_received": 0,
+      "duration_min": 30
+    },
+    {
+      "start": "09:30",
+      "label": "Agustin L.",
+      "synthea_id": "364b3313-e37e-c39c-86f6-cc08c6391667",
+      "age": 19,
+      "gender": "M",
+      "hypertension": 0,
+      "diabetes": 0,
+      "prior_appts": 0,
+      "prior_noshows": 0,
+      "lead_days": 3,
+      "booked_hour": 10,
+      "sms_received": 0,
+      "duration_min": 30
+    },
+    {
+      "start": "10:00",
+      "label": "Carl W.",
+      "synthea_id": "40cb702b-b82e-8f1c-b970-d1444ca2f37c",
+      "age": 40,
+      "gender": "F",
+      "hypertension": 0,
+      "diabetes": 1,
+      "prior_appts": 2,
+      "prior_noshows": 2,
+      "lead_days": 45,
+      "booked_hour": 14,
+      "sms_received": 1,
+      "duration_min": 30
+    },
+    {
+      "start": "10:30",
+      "label": "Lory B.",
+      "synthea_id": "ccf1b18a-6eee-85ba-033b-a27d6cb30a7e",
+      "age": 49,
+      "gender": "F",
+      "hypertension": 0,
+      "diabetes": 0,
+      "prior_appts": 0,
+      "prior_noshows": 0,
+      "lead_days": 7,
+      "booked_hour": 9,
+      "sms_received": 1,
+      "duration_min": 30
+    },
+    {
+      "start": "11:00",
+      "label": "Hubert B.",
+      "synthea_id": "0089261f-0a8b-a7d2-aeb0-925bb0e240d9",
+      "age": 30,
+      "gender": "M",
+      "hypertension": 0,
+      "diabetes": 0,
+      "prior_appts": 0,
+      "prior_noshows": 0,
+      "lead_days": 1,
+      "booked_hour": 16,
+      "sms_received": 0,
+      "duration_min": 30
+    },
+    {
+      "start": "13:00",
+      "label": "Shad W.",
+      "synthea_id": "bac34d0f-9f2c-ac7e-12f4-85bd5a0ab808",
+      "age": 60,
+      "gender": "M",
+      "hypertension": 0,
+      "diabetes": 0,
+      "prior_appts": 3,
+      "prior_noshows": 1,
+      "lead_days": 38,
+      "booked_hour": 11,
+      "sms_received": 1,
+      "duration_min": 30
+    },
+    {
+      "start": "13:30",
+      "label": "Homer L.",
+      "synthea_id": "7c4f0c8a-99c1-6d28-1f64-cd5fc98ab9da",
+      "age": 31,
+      "gender": "M",
+      "hypertension": 0,
+      "diabetes": 0,
+      "prior_appts": 0,
+      "prior_noshows": 0,
+      "lead_days": 14,
+      "booked_hour": 10,
+      "sms_received": 1,
+      "duration_min": 30
+    },
+    {
+      "start": "14:00",
+      "label": "Alejandro O.",
+      "synthea_id": "bcb04ae2-6c4e-12c8-e6d6-a7dd5702bdf1",
+      "age": 46,
+      "gender": "M",
+      "hypertension": 1,
+      "diabetes": 0,
+      "prior_appts": 2,
+      "prior_noshows": 2,
+      "lead_days": 60,
+      "booked_hour": 15,
+      "sms_received": 1,
+      "duration_min": 30
+    },
+    {
+      "start": "14:30",
+      "label": "Herbert B.",
+      "synthea_id": "f24acdde-6470-8801-eb5e-59e9a3ad232b",
+      "age": 51,
+      "gender": "M",
+      "hypertension": 1,
+      "diabetes": 1,
+      "prior_appts": 0,
+      "prior_noshows": 0,
+      "lead_days": 2,
+      "booked_hour": 9,
+      "sms_received": 0,
+      "duration_min": 30
+    },
+    {
+      "start": "15:30",
+      "label": "Lorita G.",
+      "synthea_id": "8b6333f2-56b2-86d7-7410-36c87b232b3a",
+      "age": 77,
+      "gender": "F",
+      "hypertension": 1,
+      "diabetes": 1,
+      "prior_appts": 4,
+      "prior_noshows": 1,
+      "lead_days": 28,
+      "booked_hour": 13,
+      "sms_received": 1,
+      "duration_min": 30
+    }
+  ],
+  "hospitals": [
+    {
+      "name": "Beth Israel Deaconess Medical Center - East",
+      "lat": 42.339829,
+      "lng": -71.105681,
+      "type": "Acute Hospital",
+      "municipality": "Boston",
+      "total_beds": 292
+    },
+    {
+      "name": "Boston Children's Hospital",
+      "lat": 42.33703,
+      "lng": -71.105606,
+      "type": "Acute Hospital",
+      "municipality": "Boston",
+      "total_beds": 468
+    },
+    {
+      "name": "Dana-Farber Cancer Institute",
+      "lat": 42.337602,
+      "lng": -71.10828,
+      "type": "Acute Hospital",
+      "municipality": "Boston",
+      "total_beds": 30
+    },
+    {
+      "name": "Beth Israel Deaconess Medical Center - West",
+      "lat": 42.338161,
+      "lng": -71.109137,
+      "type": "Acute Hospital",
+      "municipality": "Boston",
+      "total_beds": 495
+    },
+    {
+      "name": "Brigham and Women's Hospital",
+      "lat": 42.336052,
+      "lng": -71.107388,
+      "type": "Acute Hospital",
+      "municipality": "Boston",
+      "total_beds": 874
+    },
+    {
+      "name": "New England Baptist Hospital",
+      "lat": 42.329749,
+      "lng": -71.106731,
+      "type": "Acute Hospital",
+      "municipality": "Boston",
+      "total_beds": 118
+    },
+    {
+      "name": "Boston Medical Center - Menino Pavilion",
+      "lat": 42.334833,
+      "lng": -71.073497,
+      "type": "Acute Hospital",
+      "municipality": "Boston",
+      "total_beds": 564
+    },
+    {
+      "name": "Massachusetts Eye and Ear Infirmary",
+      "lat": 42.362774,
+      "lng": -71.070302,
+      "type": "Acute Hospital",
+      "municipality": "Boston",
+      "total_beds": 41
+    },
+    {
+      "name": "Tufts Medical Center",
+      "lat": 42.349652,
+      "lng": -71.063516,
+      "type": "Acute Hospital",
+      "municipality": "Boston",
+      "total_beds": 386
+    },
+    {
+      "name": "Massachusetts General Hospital",
+      "lat": 42.363206,
+      "lng": -71.068772,
+      "type": "Acute Hospital",
+      "municipality": "Boston",
+      "total_beds": 1045
+    },
+    {
+      "name": "Shriners' Hospital For Children",
+      "lat": 42.363089,
+      "lng": -71.066451,
+      "type": "Acute Hospital",
+      "municipality": "Boston",
+      "total_beds": 9
+    },
+    {
+      "name": "CHA Cambridge Hospital",
+      "lat": 42.37462,
+      "lng": -71.104333,
+      "type": "Acute Hospital",
+      "municipality": "Cambridge",
+      "total_beds": 177
+    }
+  ],
+  "sources": {
+    "patients": "Synthea synthetic Massachusetts residents (not real people). Apache-2.0.",
+    "hospitals": "MassGIS / MA Department of Public Health licensed hospitals.",
+    "scenario_fields": [
+      "lead_days",
+      "booked_hour",
+      "prior_noshows",
+      "sms_received",
+      "radius_miles",
+      "reliability"
+    ]
+  }
+}
