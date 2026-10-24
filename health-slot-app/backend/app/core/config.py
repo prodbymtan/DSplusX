@@ -33,7 +33,7 @@ class Settings:
     ml_src: Path = REPO_ROOT / "ml" / "src"
 
     # How long each round of offers stays open before the radius expands.
-    offer_window_seconds: float = float(os.getenv("OFFER_WINDOW_SECONDS", "30"))
+    offer_window_seconds: float = float(os.getenv("OFFER_WINDOW_SECONDS", "120"))
     # Number of times the search radius grows before the slot expires.
     ripple_rounds: int = int(os.getenv("RIPPLE_ROUNDS", "2"))
     # Each ripple round multiplies every patient's radius by this.

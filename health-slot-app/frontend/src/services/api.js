@@ -18,7 +18,9 @@ async function request(path, options = {}) {
 export const api = {
   schedule: () => request('/appointments'),
   release: (id, reason) => {
-    const path = { no_show: 'no-show', cancelled: 'cancel', unconfirmed: 'unconfirmed' }[reason]
+    // "late" reuses the no-show release endpoint (same effect: free the slot and
+    // start offering it), it's just surfaced differently in the UI.
+    const path = { no_show: 'no-show', cancelled: 'cancel', late: 'no-show' }[reason]
     return request(`/appointments/${id}/${path}`, { method: 'POST' })
   },
   patients: () => request('/patients'),
@@ -27,6 +29,7 @@ export const api = {
     request(`/patients/${id}`, { method: 'PATCH', body: JSON.stringify({ is_available: isAvailable }) }),
   claim: (slotId, patientId) =>
     request(`/slots/${slotId}/claim`, { method: 'POST', body: JSON.stringify({ patient_id: patientId }) }),
+  expand: (slotId) => request(`/slots/${slotId}/expand`, { method: 'POST' }),
   metrics: () => request('/metrics'),
   map: () => request('/map'),
   reset: () => request('/demo/reset', { method: 'POST' }),
