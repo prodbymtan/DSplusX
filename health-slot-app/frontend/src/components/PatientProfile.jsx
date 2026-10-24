@@ -7,6 +7,7 @@
 // don't clash.
 
 import { useEffect, useMemo, useRef, useState } from 'react'
+import WearablePanel from './WearablePanel'
 
 const key = (patientId) => `patient_profile_v1_${patientId}`
 
@@ -19,13 +20,8 @@ const EMPTY = {
   conditions: '',
   medications: '',
   allergies: '',
-  // Wearable
-  restingHr: '',
-  steps: '',
-  sleepHours: '',
-  spo2: '',
-  hrv: '',
-  device: '',
+  // Wearable readings are now auto-loaded from the device dataset (see WearablePanel),
+  // so they're no longer manual form fields here.
   // Uploaded documents: { id, name, size, type, dataUrl? }
   files: [],
 }
@@ -174,39 +170,9 @@ export default function PatientProfile({ patientId, onClose }) {
           </div>
 
           <h3>Wearable data</h3>
-          <div className="profile-grid">
-            <label className="field">
-              <span>Resting heart rate (bpm)</span>
-              <input type="number" min="20" max="220" value={form.restingHr} onChange={set('restingHr')} placeholder="62" />
-            </label>
-            <label className="field">
-              <span>Steps today</span>
-              <input type="number" min="0" value={form.steps} onChange={set('steps')} placeholder="8200" />
-            </label>
-            <label className="field">
-              <span>Sleep last night (hrs)</span>
-              <input type="number" min="0" max="24" step="0.1" value={form.sleepHours} onChange={set('sleepHours')} placeholder="7.5" />
-            </label>
-            <label className="field">
-              <span>Blood oxygen SpO₂ (%)</span>
-              <input type="number" min="50" max="100" value={form.spo2} onChange={set('spo2')} placeholder="98" />
-            </label>
-            <label className="field">
-              <span>Heart rate variability (ms)</span>
-              <input type="number" min="0" max="300" value={form.hrv} onChange={set('hrv')} placeholder="45" />
-            </label>
-            <label className="field">
-              <span>Device</span>
-              <select value={form.device} onChange={set('device')}>
-                <option value="">Select…</option>
-                <option value="apple_watch">Apple Watch</option>
-                <option value="fitbit">Fitbit</option>
-                <option value="garmin">Garmin</option>
-                <option value="oura">Oura Ring</option>
-                <option value="other">Other</option>
-              </select>
-            </label>
-          </div>
+          {/* Auto-loaded read-only summary from the patient's recorded wearable
+              (Empatica E4) sessions — not manual entry, and not diagnostic. */}
+          <WearablePanel patientId={patientId} />
 
           <h3>Documents</h3>
           <div

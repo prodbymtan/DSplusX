@@ -25,6 +25,7 @@ export const api = {
   },
   patients: () => request('/patients'),
   patientState: (id) => request(`/patients/${id}/state`),
+  wearable: (id) => request(`/patients/${id}/wearable`),
   setAvailable: (id, isAvailable) =>
     request(`/patients/${id}`, { method: 'PATCH', body: JSON.stringify({ is_available: isAvailable }) }),
   claim: (slotId, patientId) =>

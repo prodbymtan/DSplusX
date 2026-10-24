@@ -1,5 +1,7 @@
 // The patient's phone. Deliberately minimal: a standby toggle, and when a slot
 // is offered, a single notification popup with Accept / Decline and a countdown.
+// A "Profile" button opens the fuller profile (personal info, wearable summary,
+// documents).
 //
 // Eligibility (travel radius, insurance, specialty, standby on) is enforced by the
 // backend, so this patient only ever sees offers they can actually take. We feature
