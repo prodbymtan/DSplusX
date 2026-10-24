@@ -86,6 +86,7 @@ export default function ClinicPortal() {
             <span className={`conn ${connected ? 'on' : 'off'}`} /> {connected ? 'Live' : 'Reconnecting'}
           </span>
           <button onClick={reset}>Reset demo</button>
+          <button onClick={() => { window.location.hash = 'login' }}>Sign out</button>
         </div>
       </div>
 

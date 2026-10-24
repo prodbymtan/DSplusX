@@ -203,6 +203,8 @@ export default function PatientPortal() {
 
         <div className="pp-foot">
           <span className={`conn ${connected ? 'on' : 'off'}`} /> {connected ? 'Live' : 'Reconnecting…'} · Synthetic patient (Synthea)
+          {' · '}
+          <a href="#login" className="pp-signout">Sign out</a>
         </div>
       </div>
     </div>

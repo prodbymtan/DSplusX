@@ -1,14 +1,19 @@
-// No login. The patient and clinic portals are separate views selected by the
-// URL hash, so each can be opened on its own:
-//   #patient  -> patient's phone
-//   #clinic   -> clinic console
-// A bare URL (no hash) defaults to the clinic console.
+// Flow: login screen -> pick a role -> the matching portal.
+//   (no role / #login) -> LoginScreen
+//   #patient           -> patient's phone
+//   #clinic            -> clinic console
+// The choice is kept in the URL hash so a refresh stays put, and each portal can
+// still be linked to directly.
 
 import { useEffect, useState } from 'react'
+import LoginScreen from './components/LoginScreen'
 import PatientPortal from './screens/PatientPortal'
 import ClinicPortal from './screens/ClinicPortal'
 
-const roleFromHash = () => (window.location.hash.replace('#', '') === 'patient' ? 'patient' : 'clinic')
+const roleFromHash = () => {
+  const h = window.location.hash.replace('#', '')
+  return h === 'patient' || h === 'clinic' ? h : null
+}
 
 export default function App() {
   const [role, setRole] = useState(roleFromHash)
@@ -19,5 +24,12 @@ export default function App() {
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
 
-  return role === 'patient' ? <PatientPortal /> : <ClinicPortal />
+  const enter = (r) => {
+    window.location.hash = r
+    setRole(r)
+  }
+
+  if (role === 'patient') return <PatientPortal />
+  if (role === 'clinic') return <ClinicPortal />
+  return <LoginScreen onEnter={enter} />
 }
