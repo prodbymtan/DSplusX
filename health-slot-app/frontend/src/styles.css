@@ -224,6 +224,37 @@ button.big { font-size: 16px; padding: 14px 22px; border-radius: 12px; }
 .coverage-explainer a:focus-visible { outline: 3px solid var(--accent-strong); outline-offset: 2px; }
 .coverage-disclaimer { font-size: 15px; font-weight: 600; color: var(--text); margin: 0; }
 
+/* Patient bottom nav */
+.pp-nav { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); }
+.pp-nav button {
+  border: none; background: transparent; border-radius: 0; padding: 12px 8px; color: var(--muted);
+  display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 12px; font-weight: 600;
+}
+.pp-nav button:hover { background: var(--purple-50); }
+.pp-nav button.active { color: var(--accent); background: var(--purple-50); box-shadow: inset 0 2px 0 var(--accent); }
+.pp-nav-ico { font-size: 18px; }
+
+/* Wearable health panel */
+.wearable { display: flex; flex-direction: column; gap: 14px; }
+.wear-intro .wear-title { font-size: 18px; font-weight: 700; }
+.wear-profile { padding: 8px 12px; background: var(--purple-50); border-radius: 10px; }
+.wear-rollup { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.wear-stat { background: linear-gradient(135deg, var(--purple-700), var(--purple-500)); color: #fff; border-radius: 14px; padding: 12px 10px; text-align: center; }
+.wear-stat .ws-value { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.wear-stat .ws-unit { font-size: 12px; font-weight: 500; opacity: 0.85; }
+.wear-stat .ws-label { font-size: 11px; opacity: 0.85; margin-top: 2px; }
+
+.wear-sessions { display: flex; flex-direction: column; gap: 12px; }
+.wear-card { border: 1px solid var(--border); border-radius: 14px; padding: 14px; }
+.wc-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.wc-ico { width: 38px; height: 38px; border-radius: 10px; background: var(--purple-100); display: grid; place-items: center; font-size: 20px; flex: none; }
+.wc-name { font-weight: 700; }
+.spark { width: 100%; height: 44px; display: block; }
+.wc-hr { margin-top: 2px; }
+.wc-metrics { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 10px; font-size: 12px; color: var(--muted); }
+
+.wear-note { font-size: 11px; color: var(--muted); line-height: 1.5; background: var(--warn-bg); color: var(--warn); border-radius: 10px; padding: 10px 12px; }
+
 /* ---------- Clinic schedule ---------- */
 .clinic-head-card { margin-bottom: 18px; }
 .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 18px; }
@@ -397,3 +428,55 @@ button.big { font-size: 16px; padding: 14px 22px; border-radius: 12px; }
 }
 .login .btn-demo:hover { background: var(--purple-50); }
 .login-demo-note { color: var(--muted); font-size: 12px; text-align: center; margin: 10px 0 0; }
+
+/* ---------- Patient profile ---------- */
+.pp-header-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.pp-profile-btn {
+  background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.28); color: #fff;
+  font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 10px; cursor: pointer;
+}
+.pp-profile-btn:hover { background: rgba(255,255,255,0.28); }
+
+.profile-overlay {
+  position: fixed; inset: 0; z-index: 50; display: flex; justify-content: center; align-items: flex-start;
+  background: rgba(36,23,68,0.5); padding: 24px 16px; overflow-y: auto;
+}
+.profile-sheet {
+  width: 100%; max-width: 480px; background: var(--card); border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(42,20,88,0.35); padding: 20px 22px; margin: auto 0;
+}
+.profile-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+.profile-form { display: flex; flex-direction: column; gap: 6px; }
+.profile-form h3 { margin-top: 14px; color: var(--accent-strong); }
+.profile-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 440px) { .profile-grid { grid-template-columns: 1fr; } }
+.field { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); }
+.field.wide { grid-column: 1 / -1; }
+.field input, .field select {
+  font: inherit; font-size: 14px; color: var(--text); background: var(--card);
+  border: 1px solid var(--border); border-radius: 9px; padding: 9px 11px; width: 100%;
+}
+.field input:focus, .field select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-bg); }
+
+.dropzone {
+  border: 2px dashed var(--border); border-radius: 12px; padding: 18px; text-align: center;
+  cursor: pointer; background: var(--purple-50); color: var(--text); transition: border-color 0.15s, background 0.15s;
+}
+.dropzone:hover, .dropzone:focus-visible { border-color: var(--accent); outline: none; }
+.dropzone.dragging { border-color: var(--accent); background: var(--accent-bg); }
+.dz-icon { font-size: 22px; color: var(--accent); margin-bottom: 4px; }
+.dropzone .link { color: var(--accent); font-weight: 600; text-decoration: underline; }
+
+.file-list { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.file-row {
+  display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+  border: 1px solid var(--border); border-radius: 9px; font-size: 13px;
+}
+.file-ico { flex: none; }
+.file-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.file-name a { color: var(--accent); }
+.file-size { flex: none; }
+.file-remove { padding: 4px 8px; font-size: 12px; }
+
+.profile-actions { display: flex; align-items: center; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.profile-note { margin-top: 8px; }

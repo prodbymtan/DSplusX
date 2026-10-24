@@ -1,5 +1,7 @@
 // The patient's phone. Deliberately minimal: a standby toggle, and when a slot
 // is offered, a single notification popup with Accept / Decline and a countdown.
+// A "Profile" button opens the fuller profile (personal info, wearable summary,
+// documents).
 //
 // Eligibility (travel radius, insurance, specialty, standby on) is enforced by the
 // backend, so this patient only ever sees offers they can actually take. We feature
@@ -11,6 +13,7 @@ import { connectSocket } from '../services/socket'
 import { fmtCountdown, remaining, useNow } from '../hooks'
 import EmergencyTab from '../components/EmergencyTab'
 import CoverageTab from '../components/CoverageTab'
+import PatientProfile from '../components/PatientProfile'
 
 const FEATURED_PATIENT_ID = 1
 
@@ -43,6 +46,7 @@ export default function PatientPortal() {
   const [busy, setBusy] = useState(false)
   const [notice, setNotice] = useState(null)
   const [tab, setTab] = useState('standby')
+  const [profileOpen, setProfileOpen] = useState(false)
   const now = useNow()
 
   const refresh = useCallback(async () => {
@@ -121,8 +125,15 @@ export default function PatientPortal() {
     <div className="patient-stage">
       <div className="patient-phone">
         <div className="pp-header">
-          <div className="pp-hi">Signed in as</div>
-          <div className="pp-name">{p.name}</div>
+          <div className="pp-header-top">
+            <div>
+              <div className="pp-hi">Signed in as</div>
+              <div className="pp-name">{p.name}</div>
+            </div>
+            <button className="pp-profile-btn" onClick={() => setProfileOpen(true)} aria-label="Open your profile">
+              Profile
+            </button>
+          </div>
           <div className="pp-meta">
             <span>📍 {p.distance_miles} mi from clinic</span>
             <span>🚗 travels ≤ {p.radius_miles} mi</span>
@@ -251,6 +262,10 @@ export default function PatientPortal() {
           <a href="#login" className="pp-signout">Sign out</a>
         </div>
       </div>
+
+      {profileOpen && (
+        <PatientProfile patientId={FEATURED_PATIENT_ID} onClose={() => setProfileOpen(false)} />
+      )}
     </div>
   )
 }

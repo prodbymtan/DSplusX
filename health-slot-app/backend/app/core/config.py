@@ -32,6 +32,15 @@ class Settings:
     metrics_path: Path = Path(os.getenv("METRICS_PATH", REPO_ROOT / "ml" / "artifacts" / "metrics.json"))
     ml_src: Path = REPO_ROOT / "ml" / "src"
 
+    # Empatica E4 wearable dataset (stress / aerobic / anaerobic lab sessions).
+    # Kept local (gitignored); the portal shows a summary of one subject's sessions.
+    wearable_dir: Path = Path(
+        os.getenv(
+            "WEARABLE_DIR",
+            REPO_ROOT / "wearable-device-dataset-from-induced-stress-and-structured-exercise-sessions-1.0.1",
+        )
+    )
+
     # How long each round of offers stays open before the radius expands.
     offer_window_seconds: float = float(os.getenv("OFFER_WINDOW_SECONDS", "120"))
     # Number of times the search radius grows before the slot expires.
