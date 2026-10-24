@@ -10,6 +10,7 @@ import { api } from '../services/api'
 import { connectSocket } from '../services/socket'
 import { fmtCountdown, remaining, useNow } from '../hooks'
 import EmergencyTab from '../components/EmergencyTab'
+import CoverageTab from '../components/CoverageTab'
 
 const FEATURED_PATIENT_ID = 1
 
@@ -146,6 +147,14 @@ export default function PatientPortal() {
           >
             Emergency
           </button>
+          <button
+            className={`tab ${tab === 'coverage' ? 'active' : ''}`}
+            role="tab"
+            aria-selected={tab === 'coverage'}
+            onClick={() => setTab('coverage')}
+          >
+            Coverage
+          </button>
         </div>
 
         {tab === 'standby' && (
@@ -227,6 +236,12 @@ export default function PatientPortal() {
         {tab === 'emergency' && (
           <div className="pp-body">
             <EmergencyTab lat={p.lat} lng={p.lng} />
+          </div>
+        )}
+
+        {tab === 'coverage' && (
+          <div className="pp-body">
+            <CoverageTab />
           </div>
         )}
 

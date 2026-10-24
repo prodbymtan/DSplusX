@@ -193,6 +193,37 @@ button.big { font-size: 16px; padding: 14px 22px; border-radius: 12px; }
 .emergency-state-error { color: var(--bad); }
 .emergency-demo-note { font-size: 13px; color: var(--muted); margin: 0; }
 
+/* ---------- Coverage Countdown (patient view) ---------- */
+.coverage { display: flex; flex-direction: column; gap: 16px; }
+.coverage-title { font-size: 22px; }
+.coverage-persona { font-size: 13px; color: var(--muted); margin: -8px 0 0; }
+.coverage-field { display: flex; flex-direction: column; gap: 6px; }
+.coverage-field label { font-weight: 600; color: var(--text); font-size: 15px; }
+.coverage-field input[type="date"] {
+  font: inherit; font-size: 16px; color: var(--text); background: var(--card);
+  border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; min-height: 44px;
+}
+.coverage-field input[type="date"]:focus-visible { outline: 3px solid var(--accent-strong); outline-offset: 2px; }
+.coverage-hint { font-size: 13px; color: var(--muted); margin: 0; }
+.coverage-count {
+  font-size: 22px; font-weight: 700; color: var(--text);
+  background: var(--purple-50); border: 1px solid var(--border); border-radius: 14px; padding: 16px;
+}
+.coverage-reminders { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+.coverage-reminders h3 { font-size: 14px; color: var(--muted); }
+.coverage-reminders ul { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; gap: 8px; }
+.coverage-reminder { font-size: 16px; color: var(--text); }
+.coverage-reminder-mark { font-weight: 600; }
+.coverage-reminder.reached .coverage-reminder-state { color: var(--good); font-weight: 700; }
+.coverage-reminder.upcoming .coverage-reminder-state { color: var(--muted); }
+.coverage-nosms { font-size: 13px; color: var(--muted); margin: 12px 0 0; }
+.coverage-explainer { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+.coverage-explainer h3 { font-size: 14px; color: var(--muted); }
+.coverage-explainer p { font-size: 15px; line-height: 1.6; color: var(--text); margin: 8px 0 0; }
+.coverage-explainer a { color: var(--accent); font-weight: 600; }
+.coverage-explainer a:focus-visible { outline: 3px solid var(--accent-strong); outline-offset: 2px; }
+.coverage-disclaimer { font-size: 15px; font-weight: 600; color: var(--text); margin: 0; }
+
 /* ---------- Clinic schedule ---------- */
 .clinic-head-card { margin-bottom: 18px; }
 .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 18px; }
