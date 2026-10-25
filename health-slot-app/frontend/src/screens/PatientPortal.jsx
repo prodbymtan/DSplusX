@@ -9,8 +9,10 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { api } from '../services/api'
+import { motion, useReducedMotion } from 'motion/react'
 import { connectSocket } from '../services/socket'
 import { fmtCountdown, remaining, useNow } from '../hooks'
+import { AlertIcon, BellIcon, CardIcon, CarIcon, CheckIcon, ClockIcon, PinIcon } from '../components/icons'
 import EmergencyTab from '../components/EmergencyTab'
 import CoverageTab from '../components/CoverageTab'
 import PatientProfile from '../components/PatientProfile'
@@ -24,9 +26,9 @@ function TimerRing({ secondsLeft, total }) {
   return (
     <div className="timer-ring">
       <svg width="64" height="64" viewBox="0 0 64 64">
-        <circle cx="32" cy="32" r={r} fill="none" stroke="var(--purple-100)" strokeWidth="6" />
+        <circle cx="32" cy="32" r={r} fill="none" stroke="var(--sage)" strokeWidth="6" />
         <circle
-          cx="32" cy="32" r={r} fill="none" stroke="var(--accent)" strokeWidth="6" strokeLinecap="round"
+          cx="32" cy="32" r={r} fill="none" stroke="var(--coral)" strokeWidth="6" strokeLinecap="round"
           strokeDasharray={c} strokeDashoffset={c * (1 - frac)} transform="rotate(-90 32 32)"
           style={{ transition: 'stroke-dashoffset 0.9s linear' }}
         />
@@ -48,6 +50,7 @@ export default function PatientPortal() {
   const [tab, setTab] = useState('standby')
   const [profileOpen, setProfileOpen] = useState(false)
   const now = useNow()
+  const reduce = useReducedMotion()
 
   const refresh = useCallback(async () => {
     try {
@@ -135,9 +138,9 @@ export default function PatientPortal() {
             </button>
           </div>
           <div className="pp-meta">
-            <span>📍 {p.distance_miles} mi from clinic</span>
-            <span>🚗 travels ≤ {p.radius_miles} mi</span>
-            <span>🪪 {p.insurance === 'NO_INSURANCE' ? 'Uninsured' : p.insurance}</span>
+            <span><PinIcon size={15} /> {p.distance_miles} mi from clinic</span>
+            <span><CarIcon size={15} /> travels ≤ {p.radius_miles} mi</span>
+            <span><CardIcon size={15} /> {p.insurance === 'NO_INSURANCE' ? 'Uninsured' : p.insurance}</span>
           </div>
         </div>
 
@@ -184,9 +187,14 @@ export default function PatientPortal() {
           </div>
 
           {offer ? (
-            <div className="notif">
+            <motion.div
+              className="notif"
+              initial={reduce ? false : { opacity: 0, y: 24, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ type: 'spring', stiffness: 420, damping: 30 }}
+            >
               <div className="notif-top">
-                <span className="notif-bell">🔔</span> Appointment available
+                <span className="notif-bell"><BellIcon size={18} /></span> Appointment available
               </div>
               <h2>Today at {offer.time_label}</h2>
               <div className="where">{offer.clinic} · {offer.distance_miles} mi away</div>
@@ -203,33 +211,33 @@ export default function PatientPortal() {
                 <button className="ghost" disabled={busy} onClick={decline}>Decline</button>
                 <button className="primary" disabled={busy} onClick={accept}>Accept</button>
               </div>
-            </div>
+            </motion.div>
           ) : notice ? (
-            <div className="pp-result">
-              <div className="big-ico">⚠️</div>
+            <div className="pp-result alert">
+              <div className="big-ico"><AlertIcon size={28} /></div>
               <div className={notice.cls}>{notice.text}</div>
             </div>
           ) : last && last.outcome === 'booked' ? (
             <div className="pp-result booked">
-              <div className="big-ico">✅</div>
+              <div className="big-ico"><CheckIcon size={28} /></div>
               <h2>You’re booked for {last.time_label}</h2>
               <div className="muted">Head to {offer?.clinic || state.history[0].clinic}. See you soon.</div>
             </div>
           ) : last && last.outcome === 'taken' ? (
             <div className="pp-result">
-              <div className="big-ico">⌛</div>
+              <div className="big-ico"><ClockIcon size={28} /></div>
               <h2>Just missed it</h2>
               <div className="muted">The {last.time_label} slot was claimed by someone else.</div>
             </div>
           ) : last && last.outcome === 'expired' ? (
             <div className="pp-result">
-              <div className="big-ico">⌛</div>
+              <div className="big-ico"><ClockIcon size={28} /></div>
               <h2>Offer expired</h2>
               <div className="muted">The {last.time_label} slot wasn’t claimed in time.</div>
             </div>
           ) : (
             <div className="pp-idle">
-              <div className="pulse-dot">🔔</div>
+              <div className="pulse-dot"><BellIcon size={24} /></div>
               {p.is_available ? (
                 p.eligible_now ? (
                   <div>You’re on standby. We’ll ping you the moment a slot opens nearby.</div>

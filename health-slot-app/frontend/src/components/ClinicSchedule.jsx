@@ -4,7 +4,9 @@
 // model story lives in the Data tab).
 
 import { useState } from 'react'
+import { motion, useReducedMotion } from 'motion/react'
 import { fmtCountdown, remaining, useNow } from '../hooks'
+import { CalendarIcon, CheckIcon } from './icons'
 
 const REASON = { no_show: 'No-show', late: 'No-show', cancelled: 'Cancelled', unconfirmed: 'Released' }
 
@@ -29,7 +31,7 @@ function SlotStatus({ slot, receivedAt, now }) {
   if (slot.status === 'booked') {
     return (
       <div className="slot-status booked">
-        ✓ Rebooked with {slot.booked_by}
+        <span className="si"><CheckIcon size={15} /></span> Rebooked with {slot.booked_by}
         <div className="muted small">Slot recovered</div>
       </div>
     )
@@ -44,6 +46,7 @@ function SlotStatus({ slot, receivedAt, now }) {
 
 export default function ClinicSchedule({ schedule, patients, receivedAt, onRelease, activity, lastBooked }) {
   const now = useNow()
+  const reduce = useReducedMotion()
   const [busy, setBusy] = useState(null)
   const [error, setError] = useState(null)
 
@@ -75,14 +78,20 @@ export default function ClinicSchedule({ schedule, patients, receivedAt, onRelea
 
       {lastBooked && (
         <div className="new-appt" key={lastBooked.id}>
-          <span className="na-ico">📅</span> New appointment booked — {lastBooked.text}
+          <span className="na-ico"><CalendarIcon size={18} /></span> New appointment booked — {lastBooked.text}
         </div>
       )}
       {error && <div className="error">{error}</div>}
 
       <div className="schedule">
-        {schedule.appointments.map((a) => (
-          <div key={a.id} className={`sched-row ${a.status !== 'scheduled' ? 'released' : ''}`}>
+        {schedule.appointments.map((a, i) => (
+          <motion.div
+            key={a.id}
+            className={`sched-row ${a.status !== 'scheduled' ? 'released' : ''}`}
+            initial={reduce ? false : { opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25, delay: Math.min(i * 0.035, 0.4), ease: [0.22, 1, 0.36, 1] }}
+          >
             <div className="time">{a.time_label}</div>
             <div className="who">
               <div>{a.patient_label}</div>
@@ -110,7 +119,7 @@ export default function ClinicSchedule({ schedule, patients, receivedAt, onRelea
                 </div>
               )}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 

@@ -5,6 +5,7 @@
 
 import { useEffect, useState } from 'react'
 import { api } from '../services/api'
+import { BrainIcon, DropIcon, DumbbellIcon, RunIcon, ThermometerIcon, TrendIcon, WatchIcon } from './icons'
 
 function Sparkline({ points, min, max }) {
   if (!points || points.length < 2) return null
@@ -19,12 +20,16 @@ function Sparkline({ points, min, max }) {
     .join(' ')
   return (
     <svg className="spark" width={w} height={h} viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" aria-hidden="true">
-      <path d={d} fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+      <path d={d} fill="none" stroke="var(--coral)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
     </svg>
   )
 }
 
-const ICON = { 'Stress session': '🧠', 'Aerobic workout': '🏃', 'Anaerobic workout': '🏋️' }
+const ICON = {
+  'Stress session': BrainIcon,
+  'Aerobic workout': RunIcon,
+  'Anaerobic workout': DumbbellIcon,
+}
 
 export default function WearablePanel({ patientId }) {
   const [data, setData] = useState(null)
@@ -46,7 +51,7 @@ export default function WearablePanel({ patientId }) {
   if (!data.available) {
     return (
       <div className="pp-idle">
-        <div className="pulse-dot">⌚</div>
+        <div className="pulse-dot"><WatchIcon size={24} /></div>
         <div className="muted">No wearable sessions recorded yet.</div>
       </div>
     )
@@ -85,10 +90,12 @@ export default function WearablePanel({ patientId }) {
       </div>
 
       <div className="wear-sessions">
-        {sessions.map((s, i) => (
+        {sessions.map((s, i) => {
+          const SessionIcon = ICON[s.label] || WatchIcon
+          return (
           <div className="wear-card" key={i}>
             <div className="wc-head">
-              <span className="wc-ico">{ICON[s.label] || '⌚'}</span>
+              <span className="wc-ico"><SessionIcon size={20} /></span>
               <div className="wc-title">
                 <div className="wc-name">{s.label}</div>
                 <div className="muted small">{s.date_shown} · {s.duration_min} min</div>
@@ -101,12 +108,13 @@ export default function WearablePanel({ patientId }) {
             </div>
 
             <div className="wc-metrics">
-              {s.temp_avg_c != null && <span>🌡️ {s.temp_avg_c}°C skin</span>}
-              {s.eda_avg_us != null && <span>💧 {s.eda_avg_us} µS</span>}
-              {s.movement != null && <span>📈 {s.movement} g movement</span>}
+              {s.temp_avg_c != null && <span><ThermometerIcon size={14} /> {s.temp_avg_c}°C skin</span>}
+              {s.eda_avg_us != null && <span><DropIcon size={14} /> {s.eda_avg_us} µS</span>}
+              {s.movement != null && <span><TrendIcon size={14} /> {s.movement} g movement</span>}
             </div>
           </div>
-        ))}
+          )
+        })}
       </div>
 
       <div className="wear-note">

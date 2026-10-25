@@ -6,8 +6,10 @@
 // All data comes from the existing FastAPI endpoints; nothing here changes the backend.
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { api } from '../services/api'
 import { connectSocket } from '../services/socket'
+import { CrossIcon } from '../components/icons'
 import ClinicSchedule from '../components/ClinicSchedule'
 import ClinicMap from '../components/ClinicMap'
 import DataTab from '../components/DataTab'
@@ -71,13 +73,15 @@ export default function ClinicPortal() {
     refresh()
   }
 
+  const reduce = useReducedMotion()
+
   return (
     <div className="shell">
       <div className="appbar">
         <div className="brand">
-          <span className="mark">🏥</span>
+          <span className="mark"><CrossIcon size={20} /></span>
           <span>
-            <div className="title">Slot Matcher · Clinic</div>
+            <div className="title">Relay · Clinic</div>
             <div className="subtitle">{schedule?.clinic?.name || 'Loading…'}</div>
           </span>
         </div>
@@ -105,31 +109,41 @@ export default function ClinicPortal() {
 
         {error && <div className="error">{error}</div>}
 
-        {tab === 'schedule' && (
-          <ClinicSchedule
-            schedule={schedule}
-            patients={patients}
-            receivedAt={receivedAt}
-            activity={activity}
-            lastBooked={lastBooked}
-            onRelease={async (id, reason) => {
-              await api.release(id, reason)
-              refresh()
-            }}
-          />
-        )}
-        {tab === 'map' && (
-          <ClinicMap
-            map={map}
-            schedule={schedule}
-            receivedAt={receivedAt}
-            onExpand={async (slotId) => {
-              await api.expand(slotId)
-              refresh()
-            }}
-          />
-        )}
-        {tab === 'data' && <DataTab metrics={metrics} />}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={tab}
+            initial={reduce ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {tab === 'schedule' && (
+              <ClinicSchedule
+                schedule={schedule}
+                patients={patients}
+                receivedAt={receivedAt}
+                activity={activity}
+                lastBooked={lastBooked}
+                onRelease={async (id, reason) => {
+                  await api.release(id, reason)
+                  refresh()
+                }}
+              />
+            )}
+            {tab === 'map' && (
+              <ClinicMap
+                map={map}
+                schedule={schedule}
+                receivedAt={receivedAt}
+                onExpand={async (slotId) => {
+                  await api.expand(slotId)
+                  refresh()
+                }}
+              />
+            )}
+            {tab === 'data' && <DataTab metrics={metrics} />}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   )
