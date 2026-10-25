@@ -8,6 +8,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import WearablePanel from './WearablePanel'
+import { FileIcon, UploadIcon } from './icons'
 
 const key = (patientId) => `patient_profile_v1_${patientId}`
 
@@ -186,7 +187,7 @@ export default function PatientProfile({ patientId, onClose }) {
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') fileInput.current?.click() }}
             aria-label="Upload documents: click to choose files or drop them here"
           >
-            <div className="dz-icon" aria-hidden="true">⬆</div>
+            <div className="dz-icon" aria-hidden="true"><UploadIcon size={22} /></div>
             <div>Drop files here or <span className="link">browse</span></div>
             <div className="muted small">Lab results, referrals, insurance card, prior records</div>
             <input
@@ -202,7 +203,7 @@ export default function PatientProfile({ patientId, onClose }) {
             <ul className="file-list">
               {form.files.map((f) => (
                 <li key={f.id} className="file-row">
-                  <span className="file-ico" aria-hidden="true">📄</span>
+                  <span className="file-ico" aria-hidden="true"><FileIcon size={18} /></span>
                   <span className="file-name">
                     {f.dataUrl ? (
                       <a href={f.dataUrl} download={f.name}>{f.name}</a>

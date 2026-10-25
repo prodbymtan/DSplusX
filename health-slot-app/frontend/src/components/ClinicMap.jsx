@@ -190,9 +190,11 @@ export default function ClinicMap({ map, schedule, receivedAt, onExpand }) {
             <circle cx={W / 2} cy={H / 2} r={offerRadiusPx} className="offer-edge">
               <animate attributeName="r" from="0" to={offerRadiusPx} dur="0.9s" fill="freeze" calcMode="spline" keySplines="0.22 1 0.36 1" keyTimes="0;1" />
             </circle>
+            {/* One outward pulse each time the radius grows, then it rests —
+                purposeful (shows the search widening), not a decorative loop. */}
             <circle cx={W / 2} cy={H / 2} className="offer-pulse" fill="none">
-              <animate attributeName="r" from={Math.max(6, offerRadiusPx * 0.25)} to={offerRadiusPx} dur="1.8s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="0.5" to="0" dur="1.8s" repeatCount="indefinite" />
+              <animate attributeName="r" from={Math.max(6, offerRadiusPx * 0.25)} to={offerRadiusPx} dur="1.1s" begin="0s" fill="freeze" calcMode="spline" keySplines="0.22 1 0.36 1" keyTimes="0;1" />
+              <animate attributeName="opacity" from="0.55" to="0" dur="1.1s" begin="0s" fill="freeze" />
             </circle>
           </g>
         )}
